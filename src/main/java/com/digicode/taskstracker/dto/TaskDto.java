@@ -1,6 +1,6 @@
 package com.digicode.taskstracker.dto;
 
-import com.digicode.taskstracker.models.TaskStatus;
+import com.digicode.taskstracker.entity.TaskStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
@@ -10,16 +10,19 @@ public class TaskDto {
   private String theme;
   private String description;
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-  private Date creationDate;
-  private UserDto creator;
+  private Date createdDate;
+  private UserDto author;
   private UserDto assignedUser;
   private TaskStatus status;
 
-  public TaskDto(String theme, String description, Date creationDate, UserDto creator, UserDto assignedUser, TaskStatus status) {
+  public TaskDto() {
+  }
+
+  public TaskDto(String theme, String description, Date createdDate, UserDto author, UserDto assignedUser, TaskStatus status) {
     this.theme = theme;
     this.description = description;
-    this.creationDate = creationDate;
-    this.creator = creator;
+    this.createdDate = createdDate;
+    this.author = author;
     this.assignedUser = assignedUser;
     this.status = status;
   }
@@ -32,12 +35,12 @@ public class TaskDto {
     return description;
   }
 
-  public Date getCreationDate() {
-    return creationDate;
+  public Date getCreatedDate() {
+    return createdDate;
   }
 
-  public UserDto getCreator() {
-    return creator;
+  public UserDto getAuthor() {
+    return author;
   }
 
   public UserDto getAssignedUser() {

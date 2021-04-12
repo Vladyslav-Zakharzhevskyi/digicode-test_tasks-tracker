@@ -6,6 +6,9 @@ public class UserDto {
   private String name;
   private DepartmentDto department;
 
+  public UserDto() {
+  }
+
   public UserDto(Long id, String name, DepartmentDto department) {
     this.id = id;
     this.name = name;

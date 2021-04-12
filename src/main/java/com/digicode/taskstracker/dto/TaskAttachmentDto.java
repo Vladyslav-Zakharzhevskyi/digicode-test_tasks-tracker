@@ -7,6 +7,9 @@ public class TaskAttachmentDto {
   private String fileName;
   private byte[] blob;
 
+  public TaskAttachmentDto() {
+  }
+
   public TaskAttachmentDto(String fileName, byte[] blob) {
     this.fileName = fileName;
     this.blob = blob;

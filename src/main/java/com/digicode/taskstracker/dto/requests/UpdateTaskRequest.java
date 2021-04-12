@@ -1,26 +1,25 @@
 package com.digicode.taskstracker.dto.requests;
 
-import com.digicode.taskstracker.models.TaskStatus;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UpdateTaskRequest {
 
   private String newStatus;
-  private Long assignedUseId;
+  private Long newAssignedUseId;
 
   @JsonCreator
   public UpdateTaskRequest(@JsonProperty("newStatus") String newStatus,
-                           @JsonProperty("assignedUseId") Long assignedUseId) {
+                           @JsonProperty("newAssignedUseId") Long newAssignedUseId) {
     this.newStatus = newStatus;
-    this.assignedUseId = assignedUseId;
+    this.newAssignedUseId = newAssignedUseId;
   }
 
   public String getNewStatus() {
     return newStatus;
   }
 
-  public Long getAssignedUseId() {
-    return assignedUseId;
+  public Long getNewAssignedUseId() {
+    return newAssignedUseId;
   }
 }

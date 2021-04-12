@@ -11,6 +11,9 @@ public class TaskCommentDto {
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
   private Date creationDate;
 
+  public TaskCommentDto() {
+  }
+
   public TaskCommentDto(String comment, UserDto creator, Date creationDate) {
     this.comment = comment;
     this.creator = creator;
