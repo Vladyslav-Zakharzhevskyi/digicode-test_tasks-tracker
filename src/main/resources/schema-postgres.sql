@@ -8,7 +8,7 @@ drop table if exists
 
 create table digicode.departments
 (
-    id   int generated always as identity,
+    id bigint generated always as identity,
     name varchar(20) not null,
     primary key (id)
 );
@@ -16,9 +16,9 @@ create table digicode.departments
 
 create table digicode.users
 (
-    id            int generated always as identity,
+    id            bigint generated always as identity,
     name          varchar(40) not null,
-    department_id int         not null,
+    department_id bigint         not null,
     primary key (id)
 );
 
@@ -31,12 +31,12 @@ alter table digicode.users
 
 create table digicode.tasks
 (
-    id               int generated always as identity,
+    id               bigint generated always as identity,
     date_created     timestamp default null,
     theme            varchar(100) not null,
     description      varchar(100),
-    author_id        int,
-    assigned_user_id int,
+    author_id        bigint,
+    assigned_user_id bigint,
     status           varchar(20) not null,
     primary key (id)
 );
@@ -54,9 +54,9 @@ alter table digicode.tasks
 
 create table digicode.comments
 (
-    id      int generated always as identity,
-    task_id int,
-    user_id int,
+    id      bigint generated always as identity,
+    task_id bigint,
+    user_id bigint,
     comment varchar(100) not null,
     primary key (id)
 );
@@ -74,8 +74,8 @@ alter table digicode.comments
 
 create table digicode.attachments
 (
-    id      int generated always as identity,
-    task_id int,
+    id      bigint generated always as identity,
+    task_id bigint,
     blob    bytea,
     primary key (id)
 );

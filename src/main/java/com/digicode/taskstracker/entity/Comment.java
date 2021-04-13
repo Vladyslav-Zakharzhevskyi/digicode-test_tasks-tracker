@@ -2,18 +2,11 @@ package com.digicode.taskstracker.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity(name = "comments")
-public class Comment {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+public class Comment extends BaseEntity {
 
   @ManyToOne
   @JoinColumn(name = "task_id")
@@ -21,18 +14,10 @@ public class Comment {
 
   @ManyToOne
   @JoinColumn(name = "user_id")
-  private User user;
+  private User author;
 
   @Column(name = "comment")
   private String comment;
-
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
 
   public Task getTask() {
     return task;
@@ -42,12 +27,12 @@ public class Comment {
     this.task = task;
   }
 
-  public User getUser() {
-    return user;
+  public User getAuthor() {
+    return author;
   }
 
-  public void setUser(User user) {
-    this.user = user;
+  public void setAuthor(User author) {
+    this.author = author;
   }
 
   public String getComment() {

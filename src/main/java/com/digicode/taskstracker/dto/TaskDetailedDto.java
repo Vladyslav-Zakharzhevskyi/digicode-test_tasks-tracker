@@ -11,11 +11,13 @@ public class TaskDetailedDto extends TaskDto {
 
   private List<TaskAttachmentDto> taskAttachments;
 
+  private RatingDto rating;
+
   public TaskDetailedDto() {
   }
 
-  public TaskDetailedDto(String theme, String description, Date creationDate, UserDto creator, UserDto assignedUser, TaskStatus status, List<TaskCommentDto> taskComments, List<TaskAttachmentDto> taskAttachments) {
-    super(theme, description, creationDate, creator, assignedUser, status);
+  public TaskDetailedDto(Long id, String theme, String description, Date creationDate, UserDto creator, UserDto assignedUser, TaskStatus status, List<TaskCommentDto> taskComments, List<TaskAttachmentDto> taskAttachments) {
+    super(id, theme, description, creationDate, creator, assignedUser, status);
     this.taskComments = taskComments;
     this.taskAttachments = taskAttachments;
   }
@@ -26,5 +28,13 @@ public class TaskDetailedDto extends TaskDto {
 
   public List<TaskAttachmentDto> getTaskAttachments() {
     return taskAttachments;
+  }
+
+  public RatingDto getRating() {
+    return rating;
+  }
+
+  public void setRating(RatingDto rating) {
+    this.rating = rating;
   }
 }

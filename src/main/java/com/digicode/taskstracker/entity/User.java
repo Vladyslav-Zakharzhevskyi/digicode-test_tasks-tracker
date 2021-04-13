@@ -10,11 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity(name = "users")
-public class User {
-
-  @Id
-  @GeneratedValue(strategy= GenerationType.IDENTITY)
-  private int id;
+public class User extends BaseEntity {
 
   @Column(name = "name")
   private String name;
@@ -22,15 +18,6 @@ public class User {
   @ManyToOne
   @JoinColumn(name = "department_id")
   private Department department;
-
-
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
 
   public String getName() {
     return name;

@@ -1,34 +1,29 @@
 package com.digicode.taskstracker.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.util.Date;
-
 public class TaskCommentDto {
 
+  private Long id;
   private String comment;
-  private UserDto creator;
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-  private Date creationDate;
+  private UserDto author;
 
   public TaskCommentDto() {
   }
 
-  public TaskCommentDto(String comment, UserDto creator, Date creationDate) {
+  public TaskCommentDto(Long id, String comment, UserDto author) {
+    this.id = id;
     this.comment = comment;
-    this.creator = creator;
-    this.creationDate = creationDate;
+    this.author = author;
+  }
+
+  public Long getId() {
+    return id;
   }
 
   public String getComment() {
     return comment;
   }
 
-  public UserDto getCreator() {
-    return creator;
-  }
-
-  public Date getCreationDate() {
-    return creationDate;
+  public UserDto getAuthor() {
+    return author;
   }
 }

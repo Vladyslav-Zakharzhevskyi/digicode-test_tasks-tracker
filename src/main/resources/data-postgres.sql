@@ -18,14 +18,14 @@ INSERT INTO digicode.tasks(date_created, theme, description, author_id, assigned
 VALUES (now(), 'Initialize project ig Git', 'First stage', 2, 2, 'FINISHED'),
        (now(), 'Create DTO and Controller', 'Second stage', 2, 2, 'FINISHED'),
        (now(), 'Create DB structure with optional (docker-compose file)', 'Third stage', 2, 2, 'FINISHED'),
-       (now(), 'Add Docker container itself', 'Third stage', 2, 2, 'NEW'),
-       (now(), 'Create Services and DAO layers', 'Fourth stage', 2, 2, 'NEW'),
-       (now(), 'Create Hibernate entities', 'Fourth stage', 2, 2, 'NEW'),
-       (now(), 'Write Tests', 'Fifth stage', 2, 2, 'NEW'),
-       (now(), 'Optional (add Elasticsearch)', 'Sixth stage', 2, 2, 'NEW'),
-       (now(), 'Send link to github repo', 'Seventh stage', 2, 2, 'NEW'),
+       (now(), 'Add Docker container itself', 'Third stage', 2, 2, 'FINISHED'),
+       (now(), 'Create Services and DAO layers', 'Fourth stage', 2, 2, 'FINISHED'),
+       (now(), 'Create Hibernate entities', 'Fourth stage', 2, 2, 'FINISHED'),
+       (now(), 'Write Tests', 'Fifth stage', 2, 2, 'SKIPPED'),
+       (now(), 'Optional (add Elasticsearch)', 'Sixth stage', 2, 2, 'SKIPPED'),
+       (now(), 'Send link to github repo', 'Seventh stage', 2, 2, 'IN_PROGRESS'),
        (now(), 'Simultaneously interviews processing', '', 2, 2, 'IN_PROGRESS'),
-       (now(), 'Write documentation', '', 1, 3, 'NEW');
+       (now(), 'Write documentation', '', 1, 3, 'SKIPPED');
 
 INSERT INTO digicode.comments(
     task_id, user_id, comment)

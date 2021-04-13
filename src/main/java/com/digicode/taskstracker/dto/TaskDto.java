@@ -7,6 +7,7 @@ import java.util.Date;
 
 public class TaskDto {
 
+  private Long id;
   private String theme;
   private String description;
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
@@ -18,13 +19,18 @@ public class TaskDto {
   public TaskDto() {
   }
 
-  public TaskDto(String theme, String description, Date createdDate, UserDto author, UserDto assignedUser, TaskStatus status) {
+  public TaskDto(Long id, String theme, String description, Date createdDate, UserDto author, UserDto assignedUser, TaskStatus status) {
+    this.id = id;
     this.theme = theme;
     this.description = description;
     this.createdDate = createdDate;
     this.author = author;
     this.assignedUser = assignedUser;
     this.status = status;
+  }
+
+  public Long getId() {
+    return id;
   }
 
   public String getTheme() {

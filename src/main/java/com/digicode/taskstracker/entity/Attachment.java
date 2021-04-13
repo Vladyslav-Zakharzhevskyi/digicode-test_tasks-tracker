@@ -4,19 +4,11 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 @Entity(name = "attachments")
-public class Attachment {
-
-  @Id
-  @GeneratedValue(strategy= GenerationType.IDENTITY)
-  private int id;
+public class Attachment extends BaseEntity {
 
   @ManyToOne
   @JoinColumn(name = "task_id")
@@ -24,15 +16,7 @@ public class Attachment {
 
   @Type(type="org.hibernate.type.BinaryType")
   @Column(name = "blob")
-  private byte[] attachment;
-
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
+  private byte[] blob;
 
   public Task getTask() {
     return task;
@@ -42,11 +26,11 @@ public class Attachment {
     this.task = task;
   }
 
-  public byte[] getAttachment() {
-    return attachment;
+  public byte[] getBlob() {
+    return blob;
   }
 
-  public void setAttachment(byte[] attachment) {
-    this.attachment = attachment;
+  public void setBlob(byte[] attachment) {
+    this.blob = attachment;
   }
 }

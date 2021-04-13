@@ -6,17 +6,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class NewTaskRequest {
   private String theme;
   private String description;
-  private Long creatorId;
+  private Long authorId;
   private Long assignedUserId;
 
   @JsonCreator
   public NewTaskRequest(@JsonProperty("theme") String theme,
                         @JsonProperty("description") String description,
-                        @JsonProperty("creatorId") Long creatorId,
+                        @JsonProperty("authorId") Long authorId,
                         @JsonProperty("assignedUserId") Long assignedUserId) {
     this.theme = theme;
     this.description = description;
-    this.creatorId = creatorId;
+    this.authorId = authorId;
     this.assignedUserId = assignedUserId;
   }
 
@@ -28,8 +28,8 @@ public class NewTaskRequest {
     return description;
   }
 
-  public Long getCreatorId() {
-    return creatorId;
+  public Long getAuthorId() {
+    return authorId;
   }
 
   public Long getAssignedUserId() {

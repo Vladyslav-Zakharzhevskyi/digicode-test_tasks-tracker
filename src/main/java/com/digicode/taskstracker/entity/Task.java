@@ -1,13 +1,11 @@
 package com.digicode.taskstracker.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -15,11 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity(name = "tasks")
-public class Task {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+public class Task extends BaseEntity {
 
   @Column(name = "date_created", columnDefinition = "DATE")
   private Date createdDate;
@@ -42,19 +36,11 @@ public class Task {
   @Column(name = "status")
   private TaskStatus status;
 
-  @OneToMany(mappedBy = "task", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "task", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private List<Attachment> attachments;
 
-  @OneToMany(mappedBy = "task", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "task", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private List<Comment> comments;
-
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
 
   public Date getCreatedDate() {
     return createdDate;

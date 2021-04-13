@@ -10,5 +10,9 @@ import java.util.List;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
+
   List<Task> findAllByStatus(TaskStatus status, Sort sort);
+
+  Task findTaskByIdAndCommentsId(Long id, Long commentId);
+
 }

@@ -7,10 +7,11 @@ import com.digicode.taskstracker.dto.requests.UpdateTaskRequest;
 import com.digicode.taskstracker.entity.Task;
 import com.digicode.taskstracker.entity.TaskStatus;
 import com.digicode.taskstracker.repository.TaskRepository;
+import com.digicode.taskstracker.services.TaskService;
 import com.google.common.base.Strings;
+import javassist.NotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,21 +41,24 @@ public class TasksController {
   @Autowired
   private TaskRepository taskRepository;
 
+  @Autowired
+  private TaskService taskService;
+
   @GetMapping(path = "")
   public List<TaskDto> getTasks(@RequestParam(name = "status", required = false) String status,
                                 @RequestParam(name = "sort", required = false, defaultValue = "asc") String sort) {
 
     Optional<Sort.Direction> directionOptional = Sort.Direction.fromOptionalString(sort);
     Sort.Direction direction = directionOptional.orElse(Sort.DEFAULT_DIRECTION);
-    Sort dateCreated = Sort.by(direction, "createdDate");
+    Sort sortingOptions = Sort.by(direction, "createdDate");
 
-    List<Task> tasks = Collections.emptyList();
+    List<Task> tasks;
 
     if (Strings.isNullOrEmpty(status)) {
-      tasks = taskRepository.findAll(dateCreated);
+      tasks = taskRepository.findAll(sortingOptions);
     } else {
       TaskStatus taskStatus = TaskStatus.fromOptionalString(status).orElse(TaskStatus.NEW);
-      taskRepository.findAllByStatus(taskStatus, dateCreated);
+      tasks = taskRepository.findAllByStatus(taskStatus, sortingOptions);
     }
 
     List<TaskDto> taskDtos = tasks.stream()
@@ -66,31 +70,39 @@ public class TasksController {
 
   @GetMapping(path = "{taskId}")
   public TaskDetailedDto getTask(@PathVariable(name = "taskId") Long taskId) {
-    return null;
+    return taskService.getTaskWithRating(taskId);
   }
 
   @PostMapping(path = "")
   @ResponseStatus(HttpStatus.CREATED)
   public TaskDetailedDto createTask(@ModelAttribute NewTaskRequest newTaskRequest) {
-
-    return null;
+    Task savedTask = taskService.save(mapper.map(newTaskRequest, Task.class));
+    return taskService.getTaskWithRating(savedTask);
   }
 
   @PutMapping(path = "{taskId}")
   public TaskDetailedDto updateTask(@PathVariable(name = "taskId") Long taskId,
                                     @ModelAttribute UpdateTaskRequest updateTaskRequest) {
-    return null;
+    Task updatedTask = taskService.update(taskId, updateTaskRequest);
+    return taskService.getTaskWithRating(updatedTask);
   }
 
   @PostMapping(path = "{taskId}/comment")
   public TaskDetailedDto addComment(@PathVariable(name = "taskId") Long taskId,
+                                    @RequestParam(name = "userId") Long userId,
                                     @RequestParam(name = "comment") String comment) {
-    return null;
+    Task task = taskService.addComment(taskId, userId, comment);
+    return taskService.getTaskWithRating(task);
   }
 
   @DeleteMapping(path = "{taskId}/comment/{commentId}")
   public ResponseEntity<String> removeComment(@PathVariable(name = "taskId") Long taskId,
                                               @PathVariable(name = "commentId") Long commentId) {
+    try {
+      taskService.deleteComment(taskId, commentId);
+    } catch (NotFoundException e) {
+      ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    }
     return ResponseEntity.ok("Removed successfully");
   }
 
